@@ -4,39 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.pcteez.databinding.FragmentCollectionBinding
 
 class CollectionFragment : Fragment() {
 
-    private var _binding: FragmentCollectionBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val collectionViewModel: CollectionViewModel by viewModels()
+    private lateinit var binding: FragmentCollectionBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val collectionViewModel =
-            ViewModelProvider(this).get(CollectionViewModel::class.java)
 
-        _binding = FragmentCollectionBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        binding = FragmentCollectionBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.collectionViewModel = collectionViewModel
 
-        val textView: TextView = binding.textNotifications
-        collectionViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
+        return binding.root
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
