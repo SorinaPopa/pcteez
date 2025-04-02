@@ -1,13 +1,13 @@
-package com.example.pcteez.ui.notifications
+package com.example.pcteez.ui.collection
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class CollectionViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is collection Fragment"
     }
     val text: LiveData<String> = _text
 }

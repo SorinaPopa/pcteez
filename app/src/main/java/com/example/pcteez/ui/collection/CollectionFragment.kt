@@ -1,4 +1,4 @@
-package com.example.pcteez.ui.notifications
+package com.example.pcteez.ui.collection
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.pcteez.databinding.FragmentNotificationsBinding
+import com.example.pcteez.databinding.FragmentCollectionBinding
 
-class NotificationsFragment : Fragment() {
+class CollectionFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentCollectionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val collectionViewModel =
+            ViewModelProvider(this).get(CollectionViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentCollectionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        collectionViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

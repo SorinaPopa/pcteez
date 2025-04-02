@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_wishlist" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.pcteez.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_collection"
+        android:name="com.example.pcteez.ui.collection.CollectionFragment"
+        android:label="@string/title_collection"
+        tools:layout="@layout/fragment_collection" />
 
     <fragment
         android:id="@+id/navigation_profile"
