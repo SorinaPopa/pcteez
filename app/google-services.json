@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "865243322698",
+    "project_id": "pcteez",
+    "storage_bucket": "pcteez.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865243322698:android:fa9796ea065476470b09b3",
+        "android_client_info": {
+          "package_name": "com.example.pcteez"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPEbIf0cAMKOoKIu3d5fI4xxgoGAHMPbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
