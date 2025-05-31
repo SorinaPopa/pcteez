@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.pcteez.R
 import com.example.pcteez.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -24,12 +26,12 @@ class HomeFragment : Fragment() {
         binding.homeViewModel = homeViewModel
 
 
-        val adapter = AlbumAdapter(homeViewModel.getAlbums()) { selectedAlbum ->
-            // Handle album click, e.g., open detail screen
+        val albumAdapter = AlbumAdapter(homeViewModel.getAlbums()) { _ ->
+            findNavController().navigate(R.id.action_homeFragment_to_membersFragment)
         }
 
         binding.albumRecyclerView.layoutManager = GridLayoutManager(context, 2)
-        binding.albumRecyclerView.adapter = adapter
+        binding.albumRecyclerView.adapter = albumAdapter
 
 
 

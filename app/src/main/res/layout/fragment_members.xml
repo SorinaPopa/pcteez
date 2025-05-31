@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="membersViewModel"
+            type="com.example.pcteez.ui.home.members.MembersViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+
+        tools:context=".ui.wishlist.WishlistFragment">
+
+
+        <ImageView
+            android:id="@+id/memberAll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_all"
+            app:layout_constraintBottom_toTopOf="@id/memberYunho"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/memberHongjoong"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/memberHongjoong"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_hongjoong"
+
+            app:layout_constraintBottom_toTopOf="@id/memberYeosang"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/memberAll"
+            app:layout_constraintRight_toRightOf="@id/memberSeonghwa"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/memberSeonghwa"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_seongmom"
+            app:layout_constraintBottom_toTopOf="@id/memberSan"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/memberHongjoong"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/memberYunho"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_yunho"
+            app:layout_constraintBottom_toTopOf="@id/memberMingi"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/memberYeosang"
+            app:layout_constraintTop_toBottomOf="@id/memberAll" />
+
+        <ImageView
+            android:id="@+id/memberYeosang"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_yeosang"
+            app:layout_constraintBottom_toTopOf="@id/memberWooyoung"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/memberYunho"
+            app:layout_constraintRight_toLeftOf="@id/memberSan"
+            app:layout_constraintTop_toBottomOf="@id/memberHongjoong" />
+
+        <ImageView
+            android:id="@+id/memberSan"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_sani"
+            app:layout_constraintBottom_toTopOf="@id/memberJongho"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/memberYeosang"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/memberSeonghwa" />
+
+        <ImageView
+            android:id="@+id/memberMingi"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_mingi"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/memberWooyoung"
+            app:layout_constraintTop_toBottomOf="@id/memberYunho" />
+
+        <ImageView
+            android:id="@+id/memberWooyoung"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_wooyoung"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/memberMingi"
+            app:layout_constraintRight_toRightOf="@id/memberJongho"
+            app:layout_constraintTop_toBottomOf="@id/memberYeosang" />
+
+        <ImageView
+            android:id="@+id/memberJongho"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/img_member_jongho"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/memberWooyoung"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/memberSan" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
