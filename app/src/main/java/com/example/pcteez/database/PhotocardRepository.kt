@@ -17,7 +17,13 @@ class PhotocardRepository {
             val cards = pcsSnapshot.documents.mapNotNull { it.toObject(Photocard::class.java) }
             allCards.addAll(cards)
         }
-
         return allCards
     }
+
+    suspend fun getPhotocardsForAlbum(albumId: String): List<Photocard> {
+        val albumDocRef = db.collection("photocards").document(albumId)
+        val pcsSnapshot = albumDocRef.collection("pcs").get().await()
+        return pcsSnapshot.documents.mapNotNull { it.toObject(Photocard::class.java) }
+    }
+
 }

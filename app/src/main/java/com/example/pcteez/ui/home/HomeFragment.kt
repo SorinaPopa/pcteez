@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +15,8 @@ import com.example.pcteez.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -26,18 +29,14 @@ class HomeFragment : Fragment() {
         binding.homeViewModel = homeViewModel
 
 
-        val albumAdapter = AlbumAdapter(homeViewModel.getAlbums()) { _ ->
+        val albumAdapter = AlbumAdapter(homeViewModel.getAlbums()) { album ->
+            sharedViewModel.selectAlbum(album.id)
             findNavController().navigate(R.id.action_homeFragment_to_membersFragment)
         }
 
         binding.albumRecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.albumRecyclerView.adapter = albumAdapter
 
-
-
-
-
         return binding.root
-
     }
 }

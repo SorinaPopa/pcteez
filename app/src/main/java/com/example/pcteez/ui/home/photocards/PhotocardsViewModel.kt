@@ -13,10 +13,19 @@ class PhotocardsViewModel : ViewModel() {
     private val _photocards = MutableStateFlow<List<Photocard>>(emptyList())
     val photocards: StateFlow<List<Photocard>> = _photocards
 
-    fun loadAllPhotocards() {
+    fun loadPhotocards(albumId: String?, memberCode: String?) {
         viewModelScope.launch {
-            val all = repository.getAllPhotocards()
-            _photocards.value = all
+            val allCards = if (albumId != null) {
+                repository.getPhotocardsForAlbum(albumId)
+            } else {
+                repository.getAllPhotocards()
+            }
+
+            val filteredCards = memberCode?.let { code ->
+                allCards.filter { it.member.equals(code, ignoreCase = true) }
+            } ?: allCards
+
+            _photocards.value = filteredCards
         }
     }
 }
