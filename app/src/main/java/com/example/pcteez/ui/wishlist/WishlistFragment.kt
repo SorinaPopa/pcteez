@@ -22,6 +22,11 @@ class WishlistFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.wishlistViewModel = wishlistViewModel
 
+        //uncomment to populate the db
+        //wishlistViewModel.uploadPhotoCardsFromJson(requireContext(), "1_tr1_pcs.json", "treasure1")
+
+
+
         return binding.root
 
     }
