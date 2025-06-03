@@ -1,4 +1,4 @@
-package com.example.pcteez.ui.home.business
+package com.example.pcteez.ui.home
 
 data class Album(
     val id: String = "",

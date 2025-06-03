@@ -37,5 +37,15 @@
         android:id="@+id/navigation_members"
         android:name="com.example.pcteez.ui.home.members.MembersFragment"
         android:label="@string/title_members"
-        tools:layout="@layout/fragment_members" />
+        tools:layout="@layout/fragment_members">
+        <action
+            android:id="@+id/action_membersFragment_to_photocardsFragment"
+            app:destination="@id/navigation_photocards" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_photocards"
+        android:name="com.example.pcteez.ui.home.photocards.PhotocardsFragment"
+        android:label="@string/title_photocards"
+        tools:layout="@layout/fragment_photocards" />
 </navigation>

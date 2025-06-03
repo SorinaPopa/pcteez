@@ -21,6 +21,7 @@ class WishlistViewModel : ViewModel() {
 
             val data = hashMapOf(
                 "id" to card.getString("id"),
+                "pcTitle" to card.getString("pcTitle"),
                 "albumId" to card.getString("albumId"),
                 "member" to card.getString("member"),
                 "imgUrl" to card.getString("imgUrl")

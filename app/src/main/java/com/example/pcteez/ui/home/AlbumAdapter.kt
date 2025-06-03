@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pcteez.databinding.RecyclerViewAlbumBinding
-import com.example.pcteez.ui.home.business.Album
 
 class AlbumAdapter(
     private val albumList: List<Album>,

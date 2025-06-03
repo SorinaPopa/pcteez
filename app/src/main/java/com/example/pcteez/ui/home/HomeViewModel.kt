@@ -2,7 +2,6 @@ package com.example.pcteez.ui.home
 
 import androidx.lifecycle.ViewModel
 import com.example.pcteez.R
-import com.example.pcteez.ui.home.business.Album
 
 class HomeViewModel : ViewModel(){
     private val albumList = listOf(
