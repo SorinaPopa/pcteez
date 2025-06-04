@@ -12,8 +12,13 @@ import com.example.pcteez.R
 
 class PhotocardAdapter(
     private var items: List<Photocard>,
-    private val onActionClick: (Photocard, String) -> Unit
+    private val onActionClick: (Photocard, ActionType) -> Unit
 ) : RecyclerView.Adapter<PhotocardAdapter.PhotocardViewHolder>() {
+
+    enum class ActionType {
+        COLLECTION,
+        WISHLIST
+    }
 
     inner class PhotocardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.photo_card_image)
@@ -37,8 +42,13 @@ class PhotocardAdapter(
 
         holder.title.text = card.pcTitle
 
-        holder.addBtn.setOnClickListener { onActionClick(card, "collection") }
-        holder.starBtn.setOnClickListener { onActionClick(card, "wishlist") }
+        holder.addBtn.setOnClickListener {
+            onActionClick(card, ActionType.COLLECTION)
+        }
+
+        holder.starBtn.setOnClickListener {
+            onActionClick(card, ActionType.WISHLIST)
+        }
     }
 
     override fun getItemCount() = items.size

@@ -37,7 +37,14 @@ class PhotocardsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = PhotocardAdapter(emptyList()) { photocard, action ->
-            // future add/remove handling
+            when (action) {
+                PhotocardAdapter.ActionType.COLLECTION -> {
+                    photocardsViewModel.addToCollection(photocard)
+                }
+                PhotocardAdapter.ActionType.WISHLIST -> {
+                    photocardsViewModel.addToWishlist(photocard)
+                }
+            }
         }
 
         binding.albumRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
