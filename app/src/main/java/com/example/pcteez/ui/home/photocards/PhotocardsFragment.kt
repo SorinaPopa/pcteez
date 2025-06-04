@@ -40,7 +40,7 @@ class PhotocardsFragment : Fragment() {
             // future add/remove handling
         }
 
-        binding.albumRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.albumRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.albumRecyclerView.adapter = adapter
 
         // Only one job to handle both album and member selection changes
