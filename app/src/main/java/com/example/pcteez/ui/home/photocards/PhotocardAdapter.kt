@@ -22,7 +22,7 @@ class PhotocardAdapter(
 
     inner class PhotocardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.photo_card_image)
-        val title: TextView = itemView.findViewById(R.id.album_title)
+        val title: TextView = itemView.findViewById(R.id.photocard_title)
         val addBtn: ImageButton = itemView.findViewById(R.id.button_add_collection)
         val starBtn: ImageButton = itemView.findViewById(R.id.button_add_wishlist)
     }

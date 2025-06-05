@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pcteez.databinding.FragmentPhotocardsBinding
 import com.example.pcteez.ui.home.SharedViewModel
-import com.example.pcteez.ui.home.members.MembersViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -20,7 +19,6 @@ class PhotocardsFragment : Fragment() {
     private lateinit var adapter: PhotocardAdapter
 
     private val photocardsViewModel: PhotocardsViewModel by viewModels()
-    private val membersViewModel: MembersViewModel by activityViewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
 
@@ -41,14 +39,15 @@ class PhotocardsFragment : Fragment() {
                 PhotocardAdapter.ActionType.COLLECTION -> {
                     photocardsViewModel.addToCollection(photocard)
                 }
+
                 PhotocardAdapter.ActionType.WISHLIST -> {
                     photocardsViewModel.addToWishlist(photocard)
                 }
             }
         }
 
-        binding.albumRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.albumRecyclerView.adapter = adapter
+        binding.photocardRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.photocardRecyclerView.adapter = adapter
 
         // Only one job to handle both album and member selection changes
         lifecycleScope.launch {
@@ -65,5 +64,15 @@ class PhotocardsFragment : Fragment() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        sharedViewModel.selectedAlbumId.value?.let { albumId ->
+            sharedViewModel.selectedMember.value?.let { memberCode ->
+                photocardsViewModel.loadPhotocards(albumId, memberCode)
+            }
+        }
+    }
+
 
 }

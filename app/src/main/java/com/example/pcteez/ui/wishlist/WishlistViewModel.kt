@@ -3,10 +3,29 @@ package com.example.pcteez.ui.wishlist
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.pcteez.database.PhotocardRepository
+import com.example.pcteez.ui.home.photocards.Photocard
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 
 class WishlistViewModel : ViewModel() {
+
+    private val repository = PhotocardRepository()
+
+    private val _wishlist = MutableStateFlow<List<Photocard>>(emptyList())
+    val wishlist: StateFlow<List<Photocard>> = _wishlist
+
+    fun loadWishlist() {
+        viewModelScope.launch {
+            val cards = repository.getUserWishlist()
+            _wishlist.value = cards
+        }
+    }
+
     // temporary function to populate the db
     fun uploadPhotoCardsFromJson(context: Context, jsonFileName: String, albumId: String) {
         val db = FirebaseFirestore.getInstance()
