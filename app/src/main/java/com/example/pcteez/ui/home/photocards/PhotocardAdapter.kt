@@ -12,6 +12,8 @@ import com.example.pcteez.R
 
 class PhotocardAdapter(
     private var items: List<Photocard>,
+    private var userCollection: List<Photocard> = emptyList(),
+    private var userWishlist: List<Photocard> = emptyList(),
     private val onActionClick: (Photocard, ActionType) -> Unit
 ) : RecyclerView.Adapter<PhotocardAdapter.PhotocardViewHolder>() {
 
@@ -35,6 +37,8 @@ class PhotocardAdapter(
 
     override fun onBindViewHolder(holder: PhotocardViewHolder, position: Int) {
         val card = items[position]
+        val isCollected = userCollection.any { it.id == card.id }
+        val isWishlisted = userWishlist.any { it.id == card.id }
 
         Glide.with(holder.itemView.context)
             .load(card.imgUrl)
@@ -49,12 +53,29 @@ class PhotocardAdapter(
         holder.starBtn.setOnClickListener {
             onActionClick(card, ActionType.WISHLIST)
         }
+
+        holder.addBtn.setColorFilter(
+            if (isCollected) holder.itemView.context.getColor(R.color.yellow)
+            else holder.itemView.context.getColor(R.color.black)
+        )
+
+        holder.starBtn.setColorFilter(
+            if (isWishlisted) holder.itemView.context.getColor(R.color.yellow)
+            else holder.itemView.context.getColor(R.color.black)
+        )
     }
 
     override fun getItemCount() = items.size
 
-    fun updateData(newItems: List<Photocard>) {
+    fun updateData(
+        newItems: List<Photocard>,
+        newCollection: List<Photocard> = emptyList(),
+        newWishlist: List<Photocard> = emptyList()
+    ) {
         items = newItems
+        userCollection = newCollection
+        userWishlist = newWishlist
         notifyDataSetChanged()
     }
+
 }

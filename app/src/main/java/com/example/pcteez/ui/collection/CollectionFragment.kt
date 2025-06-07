@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pcteez.databinding.FragmentCollectionBinding
 import com.example.pcteez.ui.home.photocards.PhotocardAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -36,27 +37,88 @@ class CollectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = PhotocardAdapter(emptyList()) { photocard, action ->
-            if (action == PhotocardAdapter.ActionType.COLLECTION) {
-                // Optional: remove from wishlist on click
-                collectionViewModel.loadCollection()
+            when (action) {
+                PhotocardAdapter.ActionType.COLLECTION -> {
+                    // Show confirmation if photocard is already in collection
+                    val isCollected = collectionViewModel.collection.value.any { it.id == photocard.id }
+                    if (isCollected) {
+                        showConfirmDialog(
+                            title = "Remove from Collection?",
+                            message = "Are you sure you want to remove this photocard from your collection?",
+                            onConfirm = {
+                                collectionViewModel.toggleCollection(photocard)
+                            }
+                        )
+                    } else {
+                        collectionViewModel.toggleCollection(photocard)
+                    }
+                }
+
+                PhotocardAdapter.ActionType.WISHLIST -> {
+                    val isWishlisted = collectionViewModel.wishlist.value.any { it.id == photocard.id }
+                    if (isWishlisted) {
+                        showConfirmDialog(
+                            title = "Remove from Wishlist?",
+                            message = "Are you sure you want to remove this photocard from your wishlist?",
+                            onConfirm = {
+                                collectionViewModel.toggleWishlist(photocard)
+                            }
+                        )
+                    } else {
+                        collectionViewModel.toggleWishlist(photocard)
+                    }
+                }
             }
         }
+
 
         binding.collectionRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.collectionRecyclerView.adapter = adapter
 
-        collectionViewModel.loadCollection()
+        collectionViewModel.loadData()
 
         lifecycleScope.launch {
-            collectionViewModel.collection.collectLatest { cards ->
-                adapter.updateData(cards)
+            launch {
+                collectionViewModel.collection.collectLatest { collection ->
+                    adapter.updateData(
+                        newItems = collection,
+                        newCollection = collection,
+                        newWishlist = collectionViewModel.wishlist.value
+                    )
+                }
+            }
+
+            launch {
+                collectionViewModel.wishlist.collectLatest { wishlist ->
+                    adapter.updateData(
+                        newItems = collectionViewModel.collection.value,
+                        newCollection = collectionViewModel.collection.value,
+                        newWishlist = wishlist
+                    )
+                }
             }
         }
+
     }
+
 
     override fun onResume() {
         super.onResume()
-        collectionViewModel.loadCollection()
+        collectionViewModel.loadData()
     }
+
+    private fun showConfirmDialog(title: String, message: String, onConfirm: () -> Unit) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setNegativeButton("Yes") { _, _ ->
+                onConfirm()
+            }
+            .show()
+    }
+
 
 }

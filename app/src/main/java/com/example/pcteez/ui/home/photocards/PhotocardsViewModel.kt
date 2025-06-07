@@ -28,7 +28,7 @@ class PhotocardsViewModel : ViewModel() {
             _photocards.value = filteredCards
         }
     }
-
+    
     fun addToCollection(photocard: Photocard) {
         repository.addToCollection(photocard)
     }

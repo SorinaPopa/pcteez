@@ -14,10 +14,33 @@ class CollectionViewModel : ViewModel() {
     private val _collection = MutableStateFlow<List<Photocard>>(emptyList())
     val collection: StateFlow<List<Photocard>> = _collection
 
-    fun loadCollection() {
+    private val _wishlist = MutableStateFlow<List<Photocard>>(emptyList())
+    val wishlist: StateFlow<List<Photocard>> = _wishlist
+
+    fun loadData() {
         viewModelScope.launch {
-            val cards = repository.getUserCollection()
-            _collection.value = cards
+            val collectionCards = repository.getUserCollection()
+            val wishlistCards = repository.getUserWishlist()
+            _collection.value = collectionCards
+            _wishlist.value = wishlistCards
         }
     }
+
+    fun toggleCollection(photocard: Photocard) {
+        repository.toggleCollection(photocard)
+        loadData()
+    }
+
+    fun addToWishlist(photocard: Photocard) {
+        viewModelScope.launch {
+            repository.addToWishlist(photocard)
+            loadData()
+        }
+    }
+
+    fun toggleWishlist(photocard: Photocard) {
+        repository.toggleWishlist(photocard)
+        loadData()
+    }
+
 }

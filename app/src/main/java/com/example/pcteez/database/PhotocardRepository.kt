@@ -45,6 +45,20 @@ class PhotocardRepository {
             }
     }
 
+    fun addToWishlist(photocard: Photocard) {
+        val userId = getCurrentUserId() ?: return
+        db.collection("users").document(userId)
+            .collection("wishlist")
+            .document(photocard.id)
+            .set(photocard)
+            .addOnSuccessListener {
+                Log.d("PhotocardRepository", "Added to collection: ${photocard.id}")
+            }
+            .addOnFailureListener {
+                Log.e("PhotocardRepository", "Failed to add to collection: ${it.message}")
+            }
+    }
+
     fun toggleWishlist(photocard: Photocard) {
         val userId = getCurrentUserId() ?: return
         val docRef = db.collection("users").document(userId)
@@ -67,6 +81,31 @@ class PhotocardRepository {
             }
             .addOnFailureListener {
                 Log.e("PhotocardRepository", "Error toggling wishlist: ${it.message}")
+            }
+    }
+
+    fun toggleCollection(photocard: Photocard) {
+        val userId = getCurrentUserId() ?: return
+        val docRef = db.collection("users").document(userId)
+            .collection("collection")
+            .document(photocard.id)
+
+        docRef.get()
+            .addOnSuccessListener { snapshot ->
+                if (snapshot.exists()) {
+                    docRef.delete()
+                        .addOnSuccessListener {
+                            Log.d("PhotocardRepository", "Removed from collection: ${photocard.id}")
+                        }
+                } else {
+                    docRef.set(photocard)
+                        .addOnSuccessListener {
+                            Log.d("PhotocardRepository", "Added to collection: ${photocard.id}")
+                        }
+                }
+            }
+            .addOnFailureListener {
+                Log.e("PhotocardRepository", "Error toggling collection: ${it.message}")
             }
     }
 

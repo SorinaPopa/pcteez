@@ -19,12 +19,35 @@ class WishlistViewModel : ViewModel() {
     private val _wishlist = MutableStateFlow<List<Photocard>>(emptyList())
     val wishlist: StateFlow<List<Photocard>> = _wishlist
 
-    fun loadWishlist() {
+    private val _collection = MutableStateFlow<List<Photocard>>(emptyList())
+    val collection: StateFlow<List<Photocard>> = _collection
+
+    fun loadData() {
         viewModelScope.launch {
-            val cards = repository.getUserWishlist()
-            _wishlist.value = cards
+            val wishlistCards = repository.getUserWishlist()
+            val collectionCards = repository.getUserCollection()
+            _wishlist.value = wishlistCards
+            _collection.value = collectionCards
         }
     }
+
+    fun addToCollection(photocard: Photocard) {
+        viewModelScope.launch {
+            repository.addToCollection(photocard)
+            loadData()
+        }
+    }
+
+    fun toggleWishlist(photocard: Photocard) {
+        repository.toggleWishlist(photocard)
+        loadData()
+    }
+
+    fun toggleCollection(photocard: Photocard) {
+        repository.toggleCollection(photocard)
+        loadData()
+    }
+
 
     // temporary function to populate the db
     fun uploadPhotoCardsFromJson(context: Context, jsonFileName: String, albumId: String) {

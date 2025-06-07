@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pcteez.databinding.FragmentWishlistBinding
 import com.example.pcteez.ui.home.photocards.PhotocardAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -38,27 +39,86 @@ class WishlistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = PhotocardAdapter(emptyList()) { photocard, action ->
-            if (action == PhotocardAdapter.ActionType.WISHLIST) {
-                // Optional: remove from wishlist on click
-                wishlistViewModel.loadWishlist()
+            when (action) {
+                PhotocardAdapter.ActionType.COLLECTION -> {
+                    val isCollected = wishlistViewModel.collection.value.any { it.id == photocard.id }
+                    if (isCollected) {
+                        showConfirmDialog(
+                            title = "Remove from Collection?",
+                            message = "Are you sure you want to remove this photocard from your collection?",
+                            onConfirm = {
+                                wishlistViewModel.toggleCollection(photocard)
+                            }
+                        )
+                    } else {
+                        wishlistViewModel.toggleCollection(photocard)
+                    }
+                }
+
+                PhotocardAdapter.ActionType.WISHLIST -> {
+                    val isWishlisted = wishlistViewModel.wishlist.value.any { it.id == photocard.id }
+                    if (isWishlisted) {
+                        showConfirmDialog(
+                            title = "Remove from Wishlist?",
+                            message = "Are you sure you want to remove this photocard from your wishlist?",
+                            onConfirm = {
+                                wishlistViewModel.toggleWishlist(photocard)
+                            }
+                        )
+                    } else {
+                        wishlistViewModel.toggleWishlist(photocard)
+                    }
+                }
             }
         }
+
 
         binding.wishlistRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.wishlistRecyclerView.adapter = adapter
 
-        wishlistViewModel.loadWishlist()
+        wishlistViewModel.loadData()
 
         lifecycleScope.launch {
-            wishlistViewModel.wishlist.collectLatest { cards ->
-                adapter.updateData(cards)
+            launch {
+                wishlistViewModel.wishlist.collectLatest { wishlist ->
+                    adapter.updateData(
+                        newItems = wishlist,
+                        newWishlist = wishlist,
+                        newCollection = wishlistViewModel.collection.value
+                    )
+                }
+            }
+
+            launch {
+                wishlistViewModel.collection.collectLatest { collection ->
+                    adapter.updateData(
+                        newItems = wishlistViewModel.wishlist.value,
+                        newWishlist = wishlistViewModel.wishlist.value,
+                        newCollection = collection
+                    )
+                }
             }
         }
+
     }
+
 
     override fun onResume() {
         super.onResume()
-        wishlistViewModel.loadWishlist()
+        wishlistViewModel.loadData()
+    }
+
+    private fun showConfirmDialog(title: String, message: String, onConfirm: () -> Unit) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setNegativeButton("Yes") { _, _ ->
+                onConfirm()
+            }
+            .show()
     }
 
 
