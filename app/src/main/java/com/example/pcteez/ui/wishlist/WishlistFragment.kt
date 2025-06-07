@@ -29,7 +29,7 @@ class WishlistFragment : Fragment() {
         binding.wishlistViewModel = wishlistViewModel
 
         //uncomment to populate the db
-        //wishlistViewModel.uploadPhotoCardsFromJson(requireContext(), "1_tr1_pcs.json", "treasure1")
+        //wishlistViewModel.uploadPhotoCardsFromJson(requireContext(), "7_fv2_pcs.json", "fever2")
 
         return binding.root
     }

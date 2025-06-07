@@ -1,50 +1,58 @@
 [
   {
     "id": "9",
-    "albumId": "1_tr1",
+    "pcTitle": "Hongjoong - Zero to One (Say My Name)",
+    "albumId": "2_tr2",
     "member": "hj",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1748977816/HJ_SAY_MY_NAME_hhytha.png"
   },
   {
     "id": "10",
-    "albumId": "1_tr1",
+    "pcTitle": "Seonghwa - Zero to One (Say My Name)",
+    "albumId": "2_tr2",
     "member": "sh",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1748977817/SH_SAYMYNAME_iojwc1.png"
   },
   {
     "id": "11",
-    "albumId": "1_tr1",
+    "pcTitle": "Yunho - Zero to One (Say My Name)",
+    "albumId": "2_tr2",
     "member": "yh",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1748977817/YH_SAY_MY_NAME_j2itbg.png"
   },
   {
     "id": "12",
-    "albumId": "1_tr1",
+    "pcTitle": "Yeosang - Zero to One (Say My Name)",
+    "albumId": "2_tr2",
     "member": "ys",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1748977817/YS_SAY_MY_NAME_ql9i8x.png"
   },
   {
     "id": "13",
-    "albumId": "1_tr1",
+    "pcTitle": "San - Zero to One (Say My Name)",
+    "albumId": "2_tr2",
     "member": "sn",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1748977817/SN_SAY_MY_NAME_jdv5ki.png"
   },
   {
     "id": "14",
-    "albumId": "1_tr1",
+    "pcTitle": "Mingi - All to Zero (Pirate King)",
+    "albumId": "2_tr2",
     "member": "mg",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1748977817/MG_SAY_MY_NAME_zxipzv.png"
   },
   {
     "id": "15",
-    "albumId": "1_tr1",
+    "pcTitle": "Wooyoung - Zero to One (Say My Name)",
+    "albumId": "2_tr2",
     "member": "wy",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1749018389/WY_SAY_MY_NAME_drirkf.png"
   },
   {
     "id": "16",
-    "albumId": "1_tr1",
+    "pcTitle": "Jongho - Zero to One (Say My Name)",
+    "albumId": "2_tr2",
     "member": "jh",
-    "imgUrl": " "
+    "imgUrl": "https://res.cloudinary.com/defs5ev0a/image/upload/v1749064998/JH_SAY_MY_NAME_smqdkj.png"
   }
 ]
