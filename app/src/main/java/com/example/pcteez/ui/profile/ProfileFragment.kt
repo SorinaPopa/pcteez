@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.pcteez.databinding.FragmentProfileBinding
 import com.example.pcteez.ui.login.LoginActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -32,11 +33,31 @@ class ProfileFragment : Fragment() {
         moodUpAuth = FirebaseAuth.getInstance()
         currentUser = moodUpAuth.currentUser!!
 
+        // TODO: implement a finding friends function
+        binding.findFriendsButton.visibility = View.GONE
+
         logoutButtonObserver()
 
         return binding.root
 
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            profileViewModel.wishlistCount.collect { count ->
+                binding.wishlistNumberText.text = "⭐: $count"
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            profileViewModel.collectionCount.collect { count ->
+                binding.collectionNumberText.text = "➕: $count"
+            }
+        }
+    }
+
 
     private fun logoutButtonObserver() {
         profileViewModel.onLogoutButtonClicked.observe(viewLifecycleOwner) { isClicked ->

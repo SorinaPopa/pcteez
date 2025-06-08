@@ -17,15 +17,102 @@
         android:layout_height="match_parent"
         tools:context=".ui.wishlist.WishlistFragment">
 
+        <TextView
+            android:id="@+id/profileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="My Profile"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/usernameField"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileTitle"
+            app:srcCompat="@drawable/img_member_seongmom" />
+
+        <EditText
+            android:id="@+id/usernameField"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:inputType="text"
+            android:text="username"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/biasField"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileImage" />
+
+        <EditText
+            android:id="@+id/biasField"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:inputType="text"
+            android:text="bias"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/usernameField"
+            app:layout_constraintBottom_toTopOf="@id/wishlistNumberText"/>
+
+        <TextView
+            android:id="@+id/wishlistNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⭐:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/collectionNumberText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/biasField" />
+
+        <TextView
+            android:id="@+id/collectionNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="➕:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/findFriendsButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wishlistNumberText" />
+
+        <Button
+            android:id="@+id/findFriendsButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Find Friends"
+            app:layout_constraintBottom_toTopOf="@id/buttonLogOut"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/collectionNumberText" />
+
         <Button
             android:id="@+id/buttonLogOut"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:onClick="@{()->profileViewModel.onClickLogoutButton()}"
             android:text="Log Out"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/findFriendsButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
